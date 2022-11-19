@@ -8,6 +8,7 @@ type person struct {
 	Birthday    string // data
 	Job         string // !!
 	phoneNUmber string
-	Groups      string 
-	
+	CreatedAt  time.Time  `json:"created_at"`
+	UpdatedAt  *time.Time `json:"updated_at"`
+	DeletedAt  *time.Time `json:"deleted_at"`
 }
