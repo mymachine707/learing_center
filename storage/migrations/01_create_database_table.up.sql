@@ -45,7 +45,7 @@ CREATE TABLE lessons (
 
 ALTER TABLE learingCenter ADD CONSTRAINT fk_direktor_person FOREIGN KEY (direktorID) REFERENCES person (id);
 ALTER TABLE learingCenter ADD CONSTRAINT fk_administrator_person FOREIGN KEY (administratorID) REFERENCES person (id);
-ALTER TABLE teachers ADD CONSTRAINT fk_teachers_person FOREIGN KEY (personID) REFERENCES lessons (id);
+ALTER TABLE teachers ADD CONSTRAINT fk_teachers_person FOREIGN KEY (personID) REFERENCES person (id);
 ALTER TABLE teachers ADD CONSTRAINT fk_teachers_lessson FOREIGN KEY (lessonsID) REFERENCES lessons (id);
 ALTER TABLE teachers ADD CONSTRAINT fk_teachers_learingCenter FOREIGN KEY (learingCenterID) REFERENCES learingCenter (id);
 ALTER TABLE lessons ADD CONSTRAINT fk_lessons_learningcenter FOREIGN KEY (learingCenterID) REFERENCES learingCenter (id);

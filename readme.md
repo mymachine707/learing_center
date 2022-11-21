@@ -13,3 +13,8 @@ migrate create -ext sql -dir ./migrations/postgres -seq -digits 2 create_databas
 //
 
 //!! groups database ochishim kere
+
+
+// migration UP 
+
+migrate -path ./storage/migrations -database 'postgres://islombek:946506184@127.0.0.1:5432/learning_centers?sslmode=disable' up
