@@ -13,10 +13,8 @@ CREATE TABLE IF NOT EXISTS person (
 
 CREATE TABLE learingCenter (
    id CHAR(36) PRIMARY KEY,
-   direktor_ID CHAR(255),
-   administrator_ID CHAR(255),
-   listcource VARCHAR(255) NOT NULL,
-   listteachers VARCHAR(255) NOT NULL,
+   direktorID CHAR(255),
+   administratorID CHAR(255),
    address_s VARCHAR(255) NOT NULL,
    created_at TIMESTAMP DEFAULT now(),
    updated_at TIMESTAMP,
@@ -24,9 +22,10 @@ CREATE TABLE learingCenter (
 );
 
 CREATE TABLE IF NOT EXISTS teachers (
-	person_id CHAR(36) PRIMARY KEY,
+	personID CHAR(36) PRIMARY KEY,
 	fulname VARCHAR(255) NOT NULL,
-	lessons_ID CHAR(255),
+	lessonsID CHAR(255),
+    learingCenterID CHAR(255),
 	created_at TIMESTAMP DEFAULT now(),
 	updated_at TIMESTAMP,
 	deleted_at TIMESTAMP
@@ -35,18 +34,20 @@ CREATE TABLE IF NOT EXISTS teachers (
 
 CREATE TABLE lessons (
    id CHAR(36) PRIMARY KEY,
-   course VARCHAR(255) UNIQUE NOT NULL,
-   learingCenter_ID CHAR(255),
-   listteachers VARCHAR(255) NOT NULL,
+   courseName VARCHAR(255) UNIQUE NOT NULL,
+   learingCenterID CHAR(255),
+   Price VARCHAR(255) UNIQUE NOT NULL,
    created_at TIMESTAMP DEFAULT now(),
    updated_at TIMESTAMP,
    deleted_at TIMESTAMP
 );
 
 
-ALTER TABLE learingCenter ADD CONSTRAINT fk_direktor_person FOREIGN KEY (direktor_ID) REFERENCES person (id);
-ALTER TABLE learingCenter ADD CONSTRAINT fk_administrator_person FOREIGN KEY (administrator_ID) REFERENCES person (id);
-ALTER TABLE teachers ADD CONSTRAINT fk_teachers_lessson FOREIGN KEY (lessons_ID) REFERENCES lessons (id);
-ALTER TABLE lessons ADD CONSTRAINT fk_lessons_learningcenter FOREIGN KEY (learingCenter_ID) REFERENCES learingCenter (id);
+ALTER TABLE learingCenter ADD CONSTRAINT fk_direktor_person FOREIGN KEY (direktorID) REFERENCES person (id);
+ALTER TABLE learingCenter ADD CONSTRAINT fk_administrator_person FOREIGN KEY (administratorID) REFERENCES person (id);
+ALTER TABLE teachers ADD CONSTRAINT fk_teachers_person FOREIGN KEY (personID) REFERENCES lessons (id);
+ALTER TABLE teachers ADD CONSTRAINT fk_teachers_lessson FOREIGN KEY (lessonsID) REFERENCES lessons (id);
+ALTER TABLE teachers ADD CONSTRAINT fk_teachers_learingCenter FOREIGN KEY (learingCenterID) REFERENCES learingCenter (id);
+ALTER TABLE lessons ADD CONSTRAINT fk_lessons_learningcenter FOREIGN KEY (learingCenterID) REFERENCES learingCenter (id);
 
 
