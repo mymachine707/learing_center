@@ -2,15 +2,15 @@ Storage
 Handlar
 Crud
 
+// Kodlani githubga push qimaslik kere
+
 
 
 // This link for install migration 
 https://github.com/golang-migrate/migrate/tree/master/cmd/migrate
 
 // This code for create migration 
-migrate create -ext sql -dir ./migrations/postgres -seq -digits 2 create_database_table
-
-//
+migrate create -ext sql -dir ./storage/migrations -seq -digits 2 insert_info_table
 
 //!! groups database ochishim kere
 
