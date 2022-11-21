@@ -13,8 +13,8 @@ CREATE TABLE IF NOT EXISTS person (
 
 CREATE TABLE learingCenter (
    id CHAR(36) PRIMARY KEY,
-   direktor VARCHAR(255) UNIQUE NOT NULL,
-   administrator VARCHAR(255) NOT NULL,
+   direktor_ID CHAR(255),
+   administrator_ID CHAR(255),
    listcource VARCHAR(255) NOT NULL,
    listteachers VARCHAR(255) NOT NULL,
    address_s VARCHAR(255) NOT NULL,
@@ -24,15 +24,29 @@ CREATE TABLE learingCenter (
 );
 
 CREATE TABLE IF NOT EXISTS teachers (
-	id CHAR(36) PRIMARY KEY,
+	person_id CHAR(36) PRIMARY KEY,
 	fulname VARCHAR(255) NOT NULL,
-	coursInfo VARCHAR(255) NOT NULL,
+	lessons_ID CHAR(255),
 	created_at TIMESTAMP DEFAULT now(),
 	updated_at TIMESTAMP,
 	deleted_at TIMESTAMP
 );
 
 
+CREATE TABLE lessons (
+   id CHAR(36) PRIMARY KEY,
+   course VARCHAR(255) UNIQUE NOT NULL,
+   learingCenter_ID CHAR(255),
+   listteachers VARCHAR(255) NOT NULL,
+   created_at TIMESTAMP DEFAULT now(),
+   updated_at TIMESTAMP,
+   deleted_at TIMESTAMP
+);
 
-//!!!
-ALTER TABLE article ADD CONSTRAINT fk_article_author FOREIGN KEY (author_id) REFERENCES author (id);
+
+ALTER TABLE learingCenter ADD CONSTRAINT fk_direktor_person FOREIGN KEY (direktor_ID) REFERENCES person (id);
+ALTER TABLE learingCenter ADD CONSTRAINT fk_administrator_person FOREIGN KEY (administrator_ID) REFERENCES person (id);
+ALTER TABLE teachers ADD CONSTRAINT fk_teachers_lessson FOREIGN KEY (lessons_ID) REFERENCES lessons (id);
+ALTER TABLE lessons ADD CONSTRAINT fk_lessons_learningcenter FOREIGN KEY (learingCenter_ID) REFERENCES learingCenter (id);
+
+
