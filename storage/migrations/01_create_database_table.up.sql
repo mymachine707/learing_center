@@ -13,6 +13,7 @@ CREATE TABLE IF NOT EXISTS person (
 
 CREATE TABLE learingCenter (
    id CHAR(36) PRIMARY KEY,
+   names VARCHAR(255) NOT NULL,
    direktorID CHAR(255),
    administratorID CHAR(255),
    address_s VARCHAR(255) NOT NULL,

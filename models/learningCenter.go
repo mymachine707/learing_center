@@ -5,6 +5,7 @@ import "time"
 // LearingCenter center info
 type LearingCenter struct {
 	ID              string     `json:"id" binding:"required"`
+	Name            string     `json:"Name" binding:"required" minLength:"4" maxLength:"500000" example:"list of Cource--example"`
 	DirektorID      person     `json:"direktor" binding:"required"`
 	AdministratorID string     `json:"listWorkers" binding:"required" minLength:"4" maxLength:"500000" example:"list of Cource--example"`
 	Address         string     `json:"address" binding:"required" minLength:"4" maxLength:"50" example:"Toshkent,Yunusobod,Xasanboy_111--example"`
