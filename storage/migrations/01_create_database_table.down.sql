@@ -6,8 +6,8 @@ ALTER TABLE teachers DROP CONSTRAINT IF EXISTS fk_teachers_learingCenter;
 ALTER TABLE lessons DROP CONSTRAINT IF EXISTS fk_lessons_learningcenter; 
 
 
-DROP TABLE lessons;
 DROP TABLE teachers;
+DROP TABLE lessons;
 DROP TABLE learingCenter; 
 DROP TABLE person;
 

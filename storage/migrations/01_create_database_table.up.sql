@@ -3,9 +3,9 @@ CREATE TABLE IF NOT EXISTS person (
 	firstname VARCHAR(255) NOT NULL,
 	lastname VARCHAR(255) NOT NULL,
     middlename VARCHAR(255) NOT NULL,
-    birthday VARCHAR(255) NOT NULL,
+    birthday VARCHAR(255) NOT NULL,  -- data time
     job VARCHAR(255) NOT NULL,
-    phoneNumber VARCHAR(255) NOT NULL,
+    phoneNumber VARCHAR(255) NOT NULL, -- number
 	created_at TIMESTAMP DEFAULT now(),
 	updated_at TIMESTAMP,
 	deleted_at TIMESTAMP
@@ -23,7 +23,8 @@ CREATE TABLE learingCenter (
 );
 
 CREATE TABLE IF NOT EXISTS teachers (
-	personID CHAR(36) PRIMARY KEY,
+    id CHAR(36) PRIMARY KEY,
+	personID CHAR(36),
 	fulname VARCHAR(255) NOT NULL,
 	lessonsID CHAR(255),
     learingCenterID CHAR(255),
@@ -37,7 +38,7 @@ CREATE TABLE lessons (
    id CHAR(36) PRIMARY KEY,
    courseName VARCHAR(255) UNIQUE NOT NULL,
    learingCenterID CHAR(255),
-   Price VARCHAR(255) UNIQUE NOT NULL,
+   price VARCHAR(255) NOT NULL,
    created_at TIMESTAMP DEFAULT now(),
    updated_at TIMESTAMP,
    deleted_at TIMESTAMP
