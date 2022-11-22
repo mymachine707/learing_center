@@ -3,11 +3,13 @@ package handlars
 import (
 	"mymachine707/models"
 	"net/http"
+	"strconv"
 
 	"github.com/gin-gonic/gin"
 	"github.com/google/uuid"
 )
 
+// RootCreatePerson ...
 func (h *Handlars) RootCreatePerson(c *gin.Context) {
 	var body models.CreatePersonModul
 
@@ -17,7 +19,7 @@ func (h *Handlars) RootCreatePerson(c *gin.Context) {
 	}
 
 	id := uuid.New()
-	err := h.stg.AddPerson(id.String(), body)
+	err := h.Stg.AddPerson(id.String(), body)
 
 	if err != nil {
 		c.JSON(http.StatusBadRequest, models.JSONErrorResponse{
@@ -26,7 +28,7 @@ func (h *Handlars) RootCreatePerson(c *gin.Context) {
 		return
 	}
 
-	person, err := h.stg.GetPersonByID(id.String())
+	person, err := h.Stg.GetPersonByID(id.String())
 
 	if err != nil {
 		c.JSON(http.StatusBadRequest, models.JSONErrorResponse{
@@ -41,11 +43,12 @@ func (h *Handlars) RootCreatePerson(c *gin.Context) {
 	})
 }
 
+// RootGetPersonByID ...
 func (h *Handlars) RootGetPersonByID(c *gin.Context) {
 
 	id := c.Param("id")
 
-	person, err := h.stg.GetPersonByID(id)
+	person, err := h.Stg.GetPersonByID(id)
 
 	if err != nil {
 		c.JSON(http.StatusBadRequest, models.JSONErrorResponse{
@@ -60,6 +63,7 @@ func (h *Handlars) RootGetPersonByID(c *gin.Context) {
 	})
 }
 
+// RootUpdatePerson ...
 func (h *Handlars) RootUpdatePerson(c *gin.Context) {
 
 	var body models.UpdatePersonModel
@@ -69,7 +73,7 @@ func (h *Handlars) RootUpdatePerson(c *gin.Context) {
 		return
 	}
 
-	err := h.stg.UpdatePerson(body)
+	err := h.Stg.UpdatePerson(body)
 
 	if err != nil {
 		c.JSON(http.StatusBadRequest, models.JSONErrorResponse{
@@ -78,7 +82,7 @@ func (h *Handlars) RootUpdatePerson(c *gin.Context) {
 		return
 	}
 
-	person, err := h.stg.GetPersonByID(body.ID)
+	person, err := h.Stg.GetPersonByID(body.ID)
 
 	if err != nil {
 		c.JSON(http.StatusBadRequest, models.JSONErrorResponse{
@@ -94,11 +98,12 @@ func (h *Handlars) RootUpdatePerson(c *gin.Context) {
 
 }
 
+// RootDeletePerson ...
 func (h *Handlars) RootDeletePerson(c *gin.Context) {
 
 	id := c.Param("id")
 
-	person, err := h.stg.GetPersonByID(id)
+	person, err := h.Stg.GetPersonByID(id)
 
 	if err != nil {
 		c.JSON(http.StatusBadRequest, models.JSONErrorResponse{
@@ -107,7 +112,7 @@ func (h *Handlars) RootDeletePerson(c *gin.Context) {
 		return
 	}
 
-	err = h.stg.DeletePerson(id)
+	err = h.Stg.DeletePerson(id)
 
 	if err != nil {
 		c.JSON(http.StatusBadRequest, models.JSONErrorResponse{
@@ -118,5 +123,45 @@ func (h *Handlars) RootDeletePerson(c *gin.Context) {
 	c.JSON(http.StatusOK, models.JSONResult{
 		Message: "Person successfuly DELETED by id!",
 		Data:    person,
+	})
+}
+
+// RootGetPersonList ...
+func (h *Handlars) RootGetPersonList(c *gin.Context) {
+	offsetStr := c.DefaultQuery("offset", "0")
+	limitStr := c.DefaultQuery("limit", "100")
+
+	search := c.DefaultQuery("search", "")
+
+	offset, err := strconv.Atoi(offsetStr)
+
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, models.JSONErrorResponse{
+			Error: err.Error(),
+		})
+		return
+	}
+
+	limit, err := strconv.Atoi(limitStr)
+
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, models.JSONErrorResponse{
+			Error: err.Error(),
+		})
+		return
+	}
+
+	personList, err := h.Stg.GetPersonList(offset, limit, search)
+
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, models.JSONErrorResponse{
+			Error: err.Error(),
+		})
+		return
+	}
+
+	c.JSON(http.StatusOK, models.JSONResult{
+		Message: "PersonList successfuly get!",
+		Data:    personList,
 	})
 }

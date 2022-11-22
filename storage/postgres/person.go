@@ -120,17 +120,17 @@ func (stg Postgres) GetPersonList(offset, limit int, search string) (resp []mode
 }
 
 // UpdatePerson ...
-func (stg Postgres) UpdatePerson(person models.UpdatePersonModel) error {
+func (stg Postgres) UpdatePerson(personw models.UpdatePersonModel) error {
 
 	rows, err := stg.db.NamedExec(`
-	UPDATE person SET firstname:=f, lastname:=l, middlename:=m, birthday:=b, job:=j, phonenumber:=p, updated_at=now() WHERE id:=id and where deleted_at is null`, map[string]interface{}{
-		"id": person.ID,
-		"f":  person.Firstname,
-		"l":  person.Lastname,
-		"m":  person.Middlename,
-		"b":  person.Birthday,
-		"j":  person.Job,
-		"p":  person.PhoneNumber,
+	UPDATE person SET firstname:=f, lastname:=l, middlename:=m, birthday:=b, job:=j, phonenumber:=p, updated_at=now() WHERE id:=id and deleted_at is null`, map[string]interface{}{
+		"id": personw.ID,
+		"f":  personw.Firstname,
+		"l":  personw.Lastname,
+		"m":  personw.Middlename,
+		"b":  personw.Birthday,
+		"j":  personw.Job,
+		"p":  personw.PhoneNumber,
 	})
 
 	if err != nil {

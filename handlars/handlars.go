@@ -6,5 +6,5 @@ import (
 
 // Handlars ...
 type Handlars struct {
-	stg storageinterface.StorageInterface
+	Stg storageinterface.StorageInterface
 }
