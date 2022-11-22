@@ -85,7 +85,9 @@ func (stg Postgres) GetPersonList(offset, limit int, search string) (resp []mode
 	SELECT * FROM person WHERE 
 	((firstname ILIKE '%' || %1 || '%') OR 
 	(lastname ILIKE '%' || $1 || '%') OR 
-	(middlename ILIKE '%' || $1 || '%'))
+	(job ILIKE '%' || $1 || '%')) OR 
+	(phonenumber ILIKE '%' || $1 || '%'))
+	
 	AND deleted_at is null LIMIT $2 OFFSET $3`, search, limit, offset)
 
 	if err != nil {
