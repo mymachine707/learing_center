@@ -10,6 +10,7 @@ require (
 	github.com/lib/pq v1.10.7
 	github.com/spf13/cast v1.5.0
 	github.com/swaggo/swag v1.8.1
+	golang.org/x/mod v0.4.2
 )
 
 require (
