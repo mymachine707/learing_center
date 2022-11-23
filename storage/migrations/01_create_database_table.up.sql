@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS teachers (
 
 CREATE TABLE lessons (
    id CHAR(36) PRIMARY KEY,
-   courseName VARCHAR(255) UNIQUE NOT NULL,
+   coursename VARCHAR(255) UNIQUE NOT NULL,
    learingCenterID CHAR(255),
    price VARCHAR(255) NOT NULL,
    created_at TIMESTAMP DEFAULT now(),

@@ -1,6 +1,7 @@
 package handlars
 
 import (
+	"fmt"
 	"mymachine707/models"
 	"net/http"
 	"strconv"
@@ -36,7 +37,6 @@ func (h *Handlars) RootCreateLesson(c *gin.Context) {
 		})
 		return
 	}
-
 	result, err := h.Stg.GetLessonByID(id.String())
 
 	if err != nil {
@@ -55,7 +55,7 @@ func (h *Handlars) RootCreateLesson(c *gin.Context) {
 }
 
 // RootGetLessonByID godoc
-// @Summary     Creat Lesson
+// @Summary     Get Lesson By ID
 // @Description Creat a new person
 // @Tags        Lesson
 // @Accept      json
@@ -65,7 +65,10 @@ func (h *Handlars) RootCreateLesson(c *gin.Context) {
 // @Failure     400    {object} models.JSONErrorResponse
 // @Router      /v1/lesson [get]
 func (h *Handlars) RootGetLessonByID(c *gin.Context) {
+
 	id := c.Param("id")
+
+	fmt.Printf("this id is : %s", id)
 
 	lesson, err := h.Stg.GetLessonByID(id)
 
@@ -80,8 +83,6 @@ func (h *Handlars) RootGetLessonByID(c *gin.Context) {
 		Message: "Lesson successfuly get by Id!",
 		Data:    lesson,
 	})
-	return
-
 }
 
 // RootGetLessonList ...
@@ -131,7 +132,6 @@ func (h *Handlars) RootGetLessonList(c *gin.Context) {
 		Message: "List Lesson successfuly get by Id!",
 		Data:    listLesson,
 	})
-	return
 }
 
 // RootUpdateLesson godoc
@@ -174,8 +174,6 @@ func (h *Handlars) RootUpdateLesson(c *gin.Context) {
 		Message: "Lesson successfuly UPDATED!",
 		Data:    resp,
 	})
-	return
-
 }
 
 // RootDeleteLesson ...
@@ -214,5 +212,4 @@ func (h *Handlars) RootDeleteLesson(c *gin.Context) {
 		Message: "Lesson successfuly Deleted!",
 		Data:    resp,
 	})
-	return
 }

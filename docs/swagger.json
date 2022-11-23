@@ -16,7 +16,7 @@
                 "tags": [
                     "Lesson"
                 ],
-                "summary": "Creat Lesson",
+                "summary": "Get Lesson By ID",
                 "parameters": [
                     {
                         "type": "string",
@@ -533,8 +533,7 @@
             "required": [
                 "LearingCenterName",
                 "Price",
-                "courseName",
-                "id"
+                "coursename"
             ],
             "properties": {
                 "LearingCenterName": {
@@ -543,14 +542,11 @@
                 "Price": {
                     "type": "integer"
                 },
-                "courseName": {
+                "coursename": {
                     "type": "string",
                     "maxLength": 50,
                     "minLength": 4,
                     "example": "GOLANG"
-                },
-                "id": {
-                    "type": "string"
                 }
             }
         },
@@ -625,7 +621,7 @@
             "required": [
                 "LearingCenterName",
                 "Price",
-                "courseName",
+                "coursename",
                 "id"
             ],
             "properties": {
@@ -635,7 +631,7 @@
                 "Price": {
                     "type": "integer"
                 },
-                "courseName": {
+                "coursename": {
                     "type": "string",
                     "maxLength": 50,
                     "minLength": 4,
@@ -721,14 +717,14 @@
             "type": "object",
             "required": [
                 "Price",
-                "courseName",
+                "coursename",
                 "id"
             ],
             "properties": {
                 "Price": {
                     "type": "integer"
                 },
-                "courseName": {
+                "coursename": {
                     "type": "string",
                     "maxLength": 50,
                     "minLength": 4,

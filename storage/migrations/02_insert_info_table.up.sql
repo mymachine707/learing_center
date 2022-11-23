@@ -15,12 +15,12 @@ INSERT into LearingCenter (id, names, direktorID, administratorID, address_s) VA
 
 
 -- lesson
-INSERT into lessons (id, courseName, learingCenterID, price) VALUES ('03db9d40-7bd9-4382-b6cd-34d597bc20b5', 'Massaj', '5a97e683-8747-4054-a344-13c9e51891a1', '450000') ON CONFLICT DO NOTHING;
-INSERT into lessons (id, courseName, learingCenterID, price) VALUES ('adf4fa60-e10d-4d9e-bec4-3304347931fc', 'Golang', '1628bd13-2bc9-4b08-9341-dec16ade38cd', '1500000') ON CONFLICT DO NOTHING;
-INSERT into lessons (id, courseName, learingCenterID, price) VALUES ('b8023df8-60b9-481a-94f6-010a231faeb6', 'Uygur taomlari', '5a97e683-8747-4054-a344-13c9e51891a1', '350000') ON CONFLICT DO NOTHING;
-INSERT into lessons (id, courseName, learingCenterID, price) VALUES ('033ec38a-f895-477c-8313-71d9c16058c3', 'Oliy tort Mastika', '5a97e683-8747-4054-a344-13c9e51891a1', '450000') ON CONFLICT DO NOTHING;
-INSERT into lessons (id, courseName, learingCenterID, price) VALUES ('f6fd1b78-88d4-402d-9d9a-c613378b521f', 'Devops', '1628bd13-2bc9-4b08-9341-dec16ade38cd', '1500000') ON CONFLICT DO NOTHING;
-INSERT into lessons (id, courseName, learingCenterID, price) VALUES ('8f327d8e-6582-42e7-9504-0233e5c3f7db', 'Kompyuter saboqlari', '1628bd13-2bc9-4b08-9341-dec16ade38cd', '350000') ON CONFLICT DO NOTHING;
+INSERT into lessons (id, coursename, learingCenterID, price) VALUES ('03db9d40-7bd9-4382-b6cd-34d597bc20b5', 'Massaj', '5a97e683-8747-4054-a344-13c9e51891a1', '450000') ON CONFLICT DO NOTHING;
+INSERT into lessons (id, coursename, learingCenterID, price) VALUES ('adf4fa60-e10d-4d9e-bec4-3304347931fc', 'Golang', '1628bd13-2bc9-4b08-9341-dec16ade38cd', '1500000') ON CONFLICT DO NOTHING;
+INSERT into lessons (id, coursename, learingCenterID, price) VALUES ('b8023df8-60b9-481a-94f6-010a231faeb6', 'Uygur taomlari', '5a97e683-8747-4054-a344-13c9e51891a1', '350000') ON CONFLICT DO NOTHING;
+INSERT into lessons (id, coursename, learingCenterID, price) VALUES ('033ec38a-f895-477c-8313-71d9c16058c3', 'Oliy tort Mastika', '5a97e683-8747-4054-a344-13c9e51891a1', '450000') ON CONFLICT DO NOTHING;
+INSERT into lessons (id, coursename, learingCenterID, price) VALUES ('f6fd1b78-88d4-402d-9d9a-c613378b521f', 'Devops', '1628bd13-2bc9-4b08-9341-dec16ade38cd', '1500000') ON CONFLICT DO NOTHING;
+INSERT into lessons (id, coursename, learingCenterID, price) VALUES ('8f327d8e-6582-42e7-9504-0233e5c3f7db', 'Kompyuter saboqlari', '1628bd13-2bc9-4b08-9341-dec16ade38cd', '350000') ON CONFLICT DO NOTHING;
 
 -- teacher
 INSERT into teachers (id, personID, fulname, lessonsID, learingCenterID) VALUES ('d94458ba-a81e-46b3-9ac4-cb8f1a2a463b', '7c07bdc1-48b6-4140-b33c-45cede566703','Aziza Tuychiyeva Dilshod qizi', '03db9d40-7bd9-4382-b6cd-34d597bc20b5', '5a97e683-8747-4054-a344-13c9e51891a1') ON CONFLICT DO NOTHING;

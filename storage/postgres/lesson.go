@@ -10,7 +10,7 @@ func (stg Postgres) AddLesson(id string, entity models.CreateLessonModels) error
 	var err error
 	_, err = stg.db.Exec(`INSERT into lessons (
 		id, 
-		courseName, 
+		coursename, 
 		learingCenterID, 
 		price
 		) VALUES (
@@ -19,7 +19,7 @@ func (stg Postgres) AddLesson(id string, entity models.CreateLessonModels) error
 		$3, 
 		$4) ON CONFLICT DO NOTHING;`,
 		id,
-		entity.CourseName,
+		entity.Coursename,
 		entity.LearingCenterID,
 		entity.Price,
 	)
@@ -35,23 +35,21 @@ func (stg Postgres) GetLessonByID(id string) (models.Lesson, error) {
 
 	var a models.Lesson
 
-	err := stg.db.QueryRow(`
-		Select 
-			l.id, 
-			l.coursname,
-			l.learingcenterid,
-			l.price,
-			l.created_at,
-			l.updated_at,
-			l.deleted_at
-			from lessons as l where id=$1 AND deleted_at is not null`, id).Scan(
-		a.ID,
-		a.CourseName,
-		a.LearingCenterID,
-		a.Price,
-		a.CreatedAt,
-		a.UpdatedAt,
-		a.DeletedAt,
+	err := stg.db.QueryRow(`SELECT 
+	 l.id,
+	 l.coursename,
+	 l.learingcenterid,
+	 l.price,
+	 l.created_at,
+	 l.updated_at,
+	 l.deleted_at FROM lessons AS l where id=$1 AND deleted_at is null`, id).Scan(
+		&a.ID,
+		&a.Coursename,
+		&a.LearingCenterID,
+		&a.Price,
+		&a.CreatedAt,
+		&a.UpdatedAt,
+		&a.DeletedAt,
 	)
 
 	if err != nil {
@@ -64,7 +62,7 @@ func (stg Postgres) GetLessonByID(id string) (models.Lesson, error) {
 func (stg Postgres) GetListLesson(offset, limit int, search string) (resp []models.Lesson, err error) {
 
 	rows, err := stg.db.Queryx(`SELECT * FROM lessons where 
-	((coursname ILIKE '%' || $1 || '%')) AND deleted_at is null LIMIT $2 OFFSET $3`, search, limit, offset)
+	((coursename ILIKE '%' || $1 || '%')) AND deleted_at is null LIMIT $2 OFFSET $3`, search, limit, offset)
 
 	if err != nil {
 		return nil, err
@@ -75,7 +73,7 @@ func (stg Postgres) GetListLesson(offset, limit int, search string) (resp []mode
 
 		err = rows.Scan(
 			&a.ID,
-			&a.CourseName,
+			&a.Coursename,
 			&a.LearingCenterID,
 			&a.Price,
 			&a.CreatedAt,
@@ -95,9 +93,9 @@ func (stg Postgres) GetListLesson(offset, limit int, search string) (resp []mode
 func (stg Postgres) UpdateLessonByID(lessonw models.UpdateLessonModels) error {
 
 	rows, err := stg.db.NamedExec(`
-	Update lessons Set coursname:=c, price:=p, updated_at=now() where id:=ids and deleted_at is null`, map[string]interface{}{
+	Update lessons Set coursename=:c, price=:p, updated_at=now() where id=:ids and deleted_at is null`, map[string]interface{}{
 		"ids": lessonw.ID,
-		"c":   lessonw.CourseName,
+		"c":   lessonw.Coursename,
 		"p":   lessonw.Price,
 	})
 

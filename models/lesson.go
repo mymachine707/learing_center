@@ -5,7 +5,7 @@ import "time"
 // Lesson ...
 type Lesson struct {
 	ID              string     `json:"id" binding:"required" `
-	CourseName      string     `json:"courseName" binding:"required" minLength:"4" maxLength:"50" example:"GOLANG"`
+	Coursename      string     `json:"coursename" binding:"required" minLength:"4" maxLength:"50" example:"GOLANG"`
 	LearingCenterID string     `json:"LearingCenterName" binding:"required"`
 	Price           int        `json:"Price" binding:"required"`
 	CreatedAt       time.Time  `json:"created_at"`
@@ -15,8 +15,7 @@ type Lesson struct {
 
 // CreateLessonModels ...
 type CreateLessonModels struct {
-	ID              string `json:"id" binding:"required" `
-	CourseName      string `json:"courseName" binding:"required" minLength:"4" maxLength:"50" example:"GOLANG"`
+	Coursename      string `json:"coursename" binding:"required" minLength:"4" maxLength:"50" example:"GOLANG"`
 	LearingCenterID string `json:"LearingCenterName" binding:"required"`
 	Price           int    `json:"Price" binding:"required"`
 }
@@ -24,7 +23,7 @@ type CreateLessonModels struct {
 // UpdateLessonModels ...
 type UpdateLessonModels struct {
 	ID         string `json:"id" binding:"required" `
-	CourseName string `json:"courseName" binding:"required" minLength:"4" maxLength:"50" example:"GOLANG"`
+	Coursename string `json:"coursename" binding:"required" minLength:"4" maxLength:"50" example:"GOLANG"`
 	Price      int    `json:"Price" binding:"required"`
 }
 

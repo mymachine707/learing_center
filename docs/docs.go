@@ -28,7 +28,7 @@ const docTemplate = `{
                 "tags": [
                     "Lesson"
                 ],
-                "summary": "Creat Lesson",
+                "summary": "Get Lesson By ID",
                 "parameters": [
                     {
                         "type": "string",
@@ -545,8 +545,7 @@ const docTemplate = `{
             "required": [
                 "LearingCenterName",
                 "Price",
-                "courseName",
-                "id"
+                "coursename"
             ],
             "properties": {
                 "LearingCenterName": {
@@ -555,14 +554,11 @@ const docTemplate = `{
                 "Price": {
                     "type": "integer"
                 },
-                "courseName": {
+                "coursename": {
                     "type": "string",
                     "maxLength": 50,
                     "minLength": 4,
                     "example": "GOLANG"
-                },
-                "id": {
-                    "type": "string"
                 }
             }
         },
@@ -637,7 +633,7 @@ const docTemplate = `{
             "required": [
                 "LearingCenterName",
                 "Price",
-                "courseName",
+                "coursename",
                 "id"
             ],
             "properties": {
@@ -647,7 +643,7 @@ const docTemplate = `{
                 "Price": {
                     "type": "integer"
                 },
-                "courseName": {
+                "coursename": {
                     "type": "string",
                     "maxLength": 50,
                     "minLength": 4,
@@ -733,14 +729,14 @@ const docTemplate = `{
             "type": "object",
             "required": [
                 "Price",
-                "courseName",
+                "coursename",
                 "id"
             ],
             "properties": {
                 "Price": {
                     "type": "integer"
                 },
-                "courseName": {
+                "coursename": {
                     "type": "string",
                     "maxLength": 50,
                     "minLength": 4,

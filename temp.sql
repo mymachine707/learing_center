@@ -24,3 +24,6 @@ SELECT * FROM person WHERE ((firstname ILIKE '%' || 'a' || '%') OR (lastname ILI
 
 
 UPDATE person SET firstname='Amirxon', lastname='Erkinov', middlename='Baxtiyor ugli', birthday='12.07.2019', job='chaqaloq', phonenumber='71-220-61-84', updated_at=now() WHERE id='b5d9eead-e14e-4f02-a4bc-313864e55406' and deleted_at is null;
+
+
+SELECT l.id, l.coursename, l.learingcenterid, l.price, l.created_at, l.updated_at, l.deleted_at FROM lessons AS l;
