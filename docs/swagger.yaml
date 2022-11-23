@@ -1,4 +1,522 @@
+definitions:
+  models.CreateLessonModels:
+    properties:
+      LearingCenterName:
+        type: string
+      Price:
+        type: integer
+      courseName:
+        example: GOLANG
+        maxLength: 50
+        minLength: 4
+        type: string
+      id:
+        type: string
+    required:
+    - LearingCenterName
+    - Price
+    - courseName
+    - id
+    type: object
+  models.CreatePersonModul:
+    properties:
+      birthday:
+        example: 09-05-1998
+        maxLength: 50
+        minLength: 4
+        type: string
+      firstname:
+        example: Islombek
+        maxLength: 50
+        minLength: 4
+        type: string
+      job:
+        example: Administrator
+        maxLength: 50
+        minLength: 4
+        type: string
+      lastname:
+        example: Oripov
+        maxLength: 50
+        minLength: 4
+        type: string
+      middlename:
+        example: Erkinjon_o'g'li
+        maxLength: 50
+        minLength: 4
+        type: string
+      phoneNumber:
+        example: 94-650-61-84
+        maxLength: 50
+        minLength: 4
+        type: string
+    required:
+    - birthday
+    - firstname
+    - job
+    - lastname
+    - middlename
+    - phoneNumber
+    type: object
+  models.JSONErrorResponse:
+    properties:
+      error:
+        type: string
+    type: object
+  models.JSONResult:
+    properties:
+      data: {}
+      message:
+        type: string
+    type: object
+  models.Lesson:
+    properties:
+      LearingCenterName:
+        type: string
+      Price:
+        type: integer
+      courseName:
+        example: GOLANG
+        maxLength: 50
+        minLength: 4
+        type: string
+      created_at:
+        type: string
+      deleted_at:
+        type: string
+      id:
+        type: string
+      updated_at:
+        type: string
+    required:
+    - LearingCenterName
+    - Price
+    - courseName
+    - id
+    type: object
+  models.Person:
+    properties:
+      birthday:
+        example: 09-05-1998
+        maxLength: 50
+        minLength: 4
+        type: string
+      created_at:
+        type: string
+      deleted_at:
+        type: string
+      firstname:
+        example: Islombek
+        maxLength: 50
+        minLength: 4
+        type: string
+      id:
+        type: string
+      job:
+        example: Administrator
+        maxLength: 50
+        minLength: 4
+        type: string
+      lastname:
+        example: Oripov
+        maxLength: 50
+        minLength: 4
+        type: string
+      middlename:
+        example: Erkinjon_o'g'li
+        maxLength: 50
+        minLength: 4
+        type: string
+      phoneNumber:
+        example: 94-650-61-84
+        maxLength: 50
+        minLength: 4
+        type: string
+      updated_at:
+        type: string
+    required:
+    - birthday
+    - firstname
+    - id
+    - job
+    - lastname
+    - middlename
+    - phoneNumber
+    type: object
+  models.UpdateLessonModels:
+    properties:
+      Price:
+        type: integer
+      courseName:
+        example: GOLANG
+        maxLength: 50
+        minLength: 4
+        type: string
+      id:
+        type: string
+    required:
+    - Price
+    - courseName
+    - id
+    type: object
+  models.UpdatePersonModel:
+    properties:
+      birthday:
+        example: 09-05-1998
+        maxLength: 50
+        minLength: 4
+        type: string
+      firstname:
+        example: Islombek
+        maxLength: 50
+        minLength: 4
+        type: string
+      id:
+        type: string
+      job:
+        example: Administrator
+        maxLength: 50
+        minLength: 4
+        type: string
+      lastname:
+        example: Oripov
+        maxLength: 50
+        minLength: 4
+        type: string
+      middlename:
+        example: Erkinjon_o'g'li
+        maxLength: 50
+        minLength: 4
+        type: string
+      phoneNumber:
+        example: 94-650-61-84
+        maxLength: 50
+        minLength: 4
+        type: string
+    required:
+    - birthday
+    - firstname
+    - id
+    - job
+    - lastname
+    - middlename
+    - phoneNumber
+    type: object
 info:
   contact: {}
-paths: {}
+paths:
+  /v1/lesson:
+    get:
+      consumes:
+      - application/json
+      description: Creat a new person
+      parameters:
+      - description: Lesson body
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            allOf:
+            - $ref: '#/definitions/models.JSONResult'
+            - properties:
+                data:
+                  $ref: '#/definitions/models.Lesson'
+              type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.JSONErrorResponse'
+      summary: Creat Lesson
+      tags:
+      - Lesson
+    post:
+      consumes:
+      - application/json
+      description: Creat a new person
+      parameters:
+      - description: Lesson body
+        in: body
+        name: person
+        required: true
+        schema:
+          $ref: '#/definitions/models.CreateLessonModels'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            allOf:
+            - $ref: '#/definitions/models.JSONResult'
+            - properties:
+                data:
+                  $ref: '#/definitions/models.Lesson'
+              type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.JSONErrorResponse'
+      summary: Creat Lesson
+      tags:
+      - Lesson
+  /v1/lesson/:
+    get:
+      consumes:
+      - application/json
+      description: GetLessonList
+      parameters:
+      - description: "0"
+        in: query
+        name: offset
+        type: integer
+      - description: "100"
+        in: query
+        name: limit
+        type: integer
+      - description: search exapmle
+        in: query
+        name: search
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/models.JSONResult'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/models.Lesson'
+                  type: array
+              type: object
+      summary: List Lesson
+      tags:
+      - Lesson
+    put:
+      consumes:
+      - application/json
+      description: Update Lesson
+      parameters:
+      - description: Lesson body
+        in: body
+        name: lesson
+        required: true
+        schema:
+          $ref: '#/definitions/models.UpdateLessonModels'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            allOf:
+            - $ref: '#/definitions/models.JSONResult'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/models.Lesson'
+                  type: array
+              type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.JSONErrorResponse'
+      summary: Update Lesson
+      tags:
+      - Lesson
+  /v1/lesson/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: get lesson by id and delete this lesson
+      parameters:
+      - description: Lesson id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            allOf:
+            - $ref: '#/definitions/models.JSONResult'
+            - properties:
+                data:
+                  $ref: '#/definitions/models.Lesson'
+              type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.JSONErrorResponse'
+      summary: Delete Lesson
+      tags:
+      - Lesson
+  /v1/person:
+    post:
+      consumes:
+      - application/json
+      description: Creat a new person
+      parameters:
+      - description: Person body
+        in: body
+        name: person
+        required: true
+        schema:
+          $ref: '#/definitions/models.CreatePersonModul'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            allOf:
+            - $ref: '#/definitions/models.JSONResult'
+            - properties:
+                data:
+                  $ref: '#/definitions/models.Person'
+              type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.JSONErrorResponse'
+      summary: Creat Person
+      tags:
+      - Person
+  /v1/person/:
+    get:
+      consumes:
+      - application/json
+      description: GetPersonList
+      parameters:
+      - description: "0"
+        in: query
+        name: offset
+        type: integer
+      - description: "100"
+        in: query
+        name: limit
+        type: integer
+      - description: search exapmle
+        in: query
+        name: search
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/models.JSONResult'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/models.Person'
+                  type: array
+              type: object
+      summary: List Person
+      tags:
+      - Person
+    put:
+      consumes:
+      - application/json
+      description: Update Person
+      parameters:
+      - description: Person body
+        in: body
+        name: person
+        required: true
+        schema:
+          $ref: '#/definitions/models.UpdatePersonModel'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            allOf:
+            - $ref: '#/definitions/models.JSONResult'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/models.Person'
+                  type: array
+              type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.JSONErrorResponse'
+      summary: Update Person
+      tags:
+      - Person
+  /v1/person/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: get person by id and delete this person
+      parameters:
+      - description: Person id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            allOf:
+            - $ref: '#/definitions/models.JSONResult'
+            - properties:
+                data:
+                  $ref: '#/definitions/models.Person'
+              type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.JSONErrorResponse'
+      summary: Delete Person
+      tags:
+      - Person
+    get:
+      consumes:
+      - application/json
+      description: get an person by id
+      parameters:
+      - description: Person id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            allOf:
+            - $ref: '#/definitions/models.JSONResult'
+            - properties:
+                data:
+                  $ref: '#/definitions/models.Person'
+              type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.JSONErrorResponse'
+      summary: GetPersonyID
+      tags:
+      - Person
 swagger: "2.0"

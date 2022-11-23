@@ -20,7 +20,7 @@ func main() {
 	cfg := config.Load()
 
 	psqlConfigString := fmt.Sprintf(
-		"host=%s port=%d user=%s paswword=%s dbname=%s sslmode=disable",
+		"host=%s port=%d user=%s password=%s dbname=%s sslmode=disable",
 		cfg.PostgresHost,
 		cfg.PostgresPort,
 		cfg.PostgresUser,
@@ -34,7 +34,7 @@ func main() {
 	var stg storageinterface.StorageInterface
 
 	stg, err = postgres.Initdb(psqlConfigString)
-	
+
 	if err != nil {
 		panic(err)
 	}
@@ -66,6 +66,12 @@ func main() {
 		v1.GET("/person", h.RootGetPersonList)
 		v1.PUT("/person", h.RootUpdatePerson)
 		v1.DELETE("/person/:id", h.RootDeletePerson)
+
+		v1.POST("/lesson", h.RootCreateLesson)
+		v1.GET("/lesson/:id", h.RootGetLessonByID)
+		v1.GET("/lesson", h.RootGetLessonList)
+		v1.PUT("/lesson", h.RootUpdateLesson)
+		v1.DELETE("/lesson/:id", h.RootDeleteLesson)
 	}
 
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))

@@ -9,7 +9,16 @@ import (
 	"github.com/google/uuid"
 )
 
-// RootCreatePerson ...
+// RootCreatePerson godoc
+// @Summary     Creat Person
+// @Description Creat a new person
+// @Tags        Person
+// @Accept      json
+// @Produce     json
+// @Param       person body     models.CreatePersonModul true "Person body"
+// @Success     201    {object} models.JSONResult{data=models.Person}
+// @Failure     400    {object} models.JSONErrorResponse
+// @Router      /v1/person [post]
 func (h *Handlars) RootCreatePerson(c *gin.Context) {
 	var body models.CreatePersonModul
 
@@ -43,7 +52,16 @@ func (h *Handlars) RootCreatePerson(c *gin.Context) {
 	})
 }
 
-// RootGetPersonByID ...
+// RootGetPersonByID godoc
+// @Summary     GetPersonyID
+// @Description get an person by id
+// @Tags        Person
+// @Accept      json
+// @Produce     json
+// @Param       id  path     string true "Person id"
+// @Success     201 {object} models.JSONResult{data=models.Person}
+// @Failure     400 {object} models.JSONErrorResponse
+// @Router      /v1/person/{id} [get]
 func (h *Handlars) RootGetPersonByID(c *gin.Context) {
 
 	id := c.Param("id")
@@ -63,7 +81,16 @@ func (h *Handlars) RootGetPersonByID(c *gin.Context) {
 	})
 }
 
-// RootUpdatePerson ...
+// RootUpdatePerson godoc
+// @Summary     Update Person
+// @Description Update Person
+// @Tags        Person
+// @Accept      json
+// @Produce     json
+// @Param       person body     models.UpdatePersonModel true "Person body"
+// @Success     201    {object} models.JSONResult{data=[]models.Person}
+// @Failure     400    {object} models.JSONErrorResponse
+// @Router      /v1/person/ [put]
 func (h *Handlars) RootUpdatePerson(c *gin.Context) {
 
 	var body models.UpdatePersonModel
@@ -99,6 +126,15 @@ func (h *Handlars) RootUpdatePerson(c *gin.Context) {
 }
 
 // RootDeletePerson ...
+// @Summary     Delete Person
+// @Description get person by id and delete this person
+// @Tags        Person
+// @Accept      json
+// @Produce     json
+// @Param       id  path     string true "Person id"
+// @Success     201 {object} models.JSONResult{data=models.Person}
+// @Failure     400 {object} models.JSONErrorResponse
+// @Router      /v1/person/{id} [delete]
 func (h *Handlars) RootDeletePerson(c *gin.Context) {
 
 	id := c.Param("id")
@@ -127,10 +163,20 @@ func (h *Handlars) RootDeletePerson(c *gin.Context) {
 }
 
 // RootGetPersonList ...
+// @Summary     List Person
+// @Description GetPersonList
+// @Tags        Person
+// @Accept      json
+// @Produce     json
+// @Param       offset query    int    false "0"
+// @Param       limit  query    int    false "100"
+// @Param       search query    string false "search exapmle"
+// @Success     200    {object} models.JSONResult{data=[]models.Person}
+// @Router      /v1/person/ [get]
 func (h *Handlars) RootGetPersonList(c *gin.Context) {
+
 	offsetStr := c.DefaultQuery("offset", "0")
 	limitStr := c.DefaultQuery("limit", "100")
-
 	search := c.DefaultQuery("search", "")
 
 	offset, err := strconv.Atoi(offsetStr)

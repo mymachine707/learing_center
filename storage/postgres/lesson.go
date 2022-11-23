@@ -6,7 +6,7 @@ import (
 )
 
 // AddLesson ...
-func (stg Postgres) AddLesson(id, entity models.CreateLessonModels) error {
+func (stg Postgres) AddLesson(id string, entity models.CreateLessonModels) error {
 	var err error
 	_, err = stg.db.Exec(`INSERT into lessons (
 		id, 
@@ -117,4 +117,23 @@ func (stg Postgres) UpdateLessonByID(lessonw models.UpdateLessonModels) error {
 	return errors.New("lesson not found")
 }
 
-//func (stg Postgres) DeleteLessonByID() {}
+//DeleteLessonByID ...
+func (stg Postgres) DeleteLessonByID(id string) error {
+
+	rows, err := stg.db.Exec(`Update lessons Set deleted_at=now() where id:=$1 and deleted_at is null`, id)
+
+	if err != nil {
+		return err
+	}
+
+	n, err := rows.RowsAffected()
+
+	if err != nil {
+		return err
+	}
+
+	if n > 0 {
+		return nil
+	}
+	return errors.New("Lesson cannot deleted becouse Lesson not found")
+}

@@ -81,14 +81,12 @@ func (stg Postgres) GetPersonByID(id string) (models.Person, error) {
 // GetPersonList ...
 func (stg Postgres) GetPersonList(offset, limit int, search string) (resp []models.Person, err error) {
 
-	rows, err := stg.db.Queryx(`
-	SELECT * FROM person WHERE 
-	((firstname ILIKE '%' || %1 || '%') OR 
-	(lastname ILIKE '%' || $1 || '%') OR 
-	(job ILIKE '%' || $1 || '%')) OR 
-	(phonenumber ILIKE '%' || $1 || '%'))
-	
-	AND deleted_at is null LIMIT $2 OFFSET $3`, search, limit, offset)
+	rows, err := stg.db.Queryx(
+		`SELECT * FROM person WHERE ((firstname ILIKE '%' || $1 || '%')
+	 OR (lastname ILIKE '%' || $1 || '%') 
+	 OR (job ILIKE '%' || $1 || '%') 
+	 OR (phonenumber ILIKE '%' || $1 || '%')) 
+	 AND deleted_at is null LIMIT $2 OFFSET $3`, search, limit, offset)
 
 	if err != nil {
 		return resp, err
@@ -122,8 +120,7 @@ func (stg Postgres) GetPersonList(offset, limit int, search string) (resp []mode
 // UpdatePerson ...
 func (stg Postgres) UpdatePerson(personw models.UpdatePersonModel) error {
 
-	rows, err := stg.db.NamedExec(`
-	UPDATE person SET firstname:=f, lastname:=l, middlename:=m, birthday:=b, job:=j, phonenumber:=p, updated_at=now() WHERE id:=id and deleted_at is null`, map[string]interface{}{
+	rows, err := stg.db.NamedExec("UPDATE person SET firstname=:f, lastname=:l, middlename=:m,	birthday=:b, job=:j, phoneNumber=:p, updated_at=now() WHERE id=:id and deleted_at is null", map[string]interface{}{
 		"id": personw.ID,
 		"f":  personw.Firstname,
 		"l":  personw.Lastname,
